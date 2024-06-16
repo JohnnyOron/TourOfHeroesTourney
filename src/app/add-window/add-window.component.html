@@ -1,0 +1,24 @@
+<h2>New Hero!</h2>
+
+<div>
+    <label for="hero-name">Hero name: </label>
+    <input id="hero-name" [(ngModel)]="heroName" placeholder="name">
+</div>
+
+<h3>Abilities:</h3>
+<button type="button" class="button circle" (click)="addAbility()">Add ability</button>
+
+<ul>
+    <li *ngFor="let ability of heroAbilities; let i = index; trackBy: trackByIndex">
+        <label for="hero-ability-{{i}}">{{i+1}}.</label>
+        <select>
+            <option *ngFor="let fullAbility of fullAbList; let j = index; trackBy: trackByIndex" value="{{fullAbility[j]}}">
+                {{fullAbility[j]}}
+            </option>
+        </select>
+        <input id="hero-ability-{{i}}-power">
+        <button type="button" (click)="removeAbility(i)">-</button>
+    </li>
+</ul>
+
+<button type="button" (click)="addHero()">Save</button>

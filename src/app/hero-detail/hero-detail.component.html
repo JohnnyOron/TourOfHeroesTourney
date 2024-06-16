@@ -6,6 +6,23 @@
     <label for="hero-name">Hero name: </label>
     <input id="hero-name" [(ngModel)]="hero.name" placeholder="name">
   </div>
+    <h3>Abilities:</h3>
+    <button type="button" class="button circle" (click)="addAbility()">+</button>
+    <ul>
+        <li *ngFor="let ability of heroAbilities; let i = index; trackBy: trackByIndex">
+            <label for="hero-ability-{{i}}">{{i+1}}.</label>
+            <select>
+                <option value="{{heroAbNames[i]}}">{{heroAbNames[i]}}</option>
+                <ng-container *ngFor="let fullAbility of fullAbList; let j = index; trackBy: trackByIndex">
+                    <option *ngIf="isNotInHeroAbNames(fullAbility)" value="{{fullAbility[j]}}">
+                        {{fullAbility}}
+                    </option>
+                </ng-container>
+            </select>
+            <input id="hero-ability-{{i}}-power" [(ngModel)]="heroPow[i]">
+            <button type="button" (click)="removeAbility(i)">-</button>
+        </li>
+    </ul>
 
   <button type="button" (click)="goBack()">go back</button>
 </div>
